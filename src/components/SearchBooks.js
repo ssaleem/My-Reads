@@ -22,8 +22,8 @@ class SearchBooks extends Component {
 		query.length >= 1 ? (
 			BooksAPI.search(query).then(
 				bookResults => {
-					console.log(query)
-					console.log(bookResults)
+					// console.log(query)
+					// console.log(bookResults)
 					bookResults = bookResults.filter((book) => typeof(book.imageLinks) !== "undefined" && typeof(book.authors) !== "undefined" )
 					for(const book of bookResults) {
 						let index = bookList.findIndex(bookEntry => bookEntry.id === book.id)
@@ -38,7 +38,7 @@ class SearchBooks extends Component {
 				}
 			).catch((e) => {
 				this.setState({ books: [] })
-				console.log(e)
+				// console.log(e)
 			})
 		) : (this.setState({ books: [] }))
 

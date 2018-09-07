@@ -17,11 +17,11 @@ class BooksApp extends React.Component {
   }
 
   updateBook(book, newShelf) {
-    console.log(book)
+    // console.log(book)
     BooksAPI.update(book, newShelf).then( () => {
       this.setState(prevState => {
         let index = prevState.books.findIndex(bookEntry => bookEntry.id === book.id)
-        console.log(index)
+        // console.log(index)
         if(index !== -1) {
           prevState.books[index].shelf = newShelf
         }

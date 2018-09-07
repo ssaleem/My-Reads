@@ -1,6 +1,6 @@
 # My Reads
 
-This project is a bookshelf app that allows the user to search and add books to his/her library and witnin library categorize them under _Currently Reading_, _Want to Read_, and _Read_ sections. The project uses React to refactor static CSS and HTML markup from this [starter repository](https://github.com/udacity/reactnd-project-myreads-starter). Project demo can be found [here](https://ssaleem.github.io/My-Read).
+This project is a bookshelf app that allows the user to search and add books to his/her library and witnin library categorize them under _Currently Reading_, _Want to Read_, and _Read_ sections. The project uses React to refactor static CSS and HTML markup from this [starter repository](https://github.com/udacity/reactnd-project-myreads-starter). Project demo can be found [here](https://ssaleem.github.io/My-Reads).
 
 
 
