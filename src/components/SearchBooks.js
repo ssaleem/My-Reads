@@ -19,28 +19,20 @@ class SearchBooks extends Component {
 	onUpdateQuery = (query) => {
 		this.setState({ query: query})
 		let bookList = this.props.bookList
-		query.length >= 1 ? (
-			BooksAPI.search(query).then(
-				bookResults => {
-					// console.log(query)
-					// console.log(bookResults)
-					bookResults = bookResults.filter((book) => typeof(book.imageLinks) !== "undefined" && typeof(book.authors) !== "undefined" )
+		query.length ?
+    ( BooksAPI.search(query)
+      .then(bookResults => {
+					bookResults = bookResults.filter(book => book.imageLinks && book.authors)
 					for(const book of bookResults) {
-						let index = bookList.findIndex(bookEntry => bookEntry.id === book.id)
-						if( index !== -1 ){
-							book.shelf = bookList[index].shelf
-						}
-						else {
-							book.shelf = "none"
-						}
+            let index = bookList.findIndex(bookEntry => bookEntry.id === book.id)
+            book.shelf = index !== -1 ? bookList[index].shelf : "none";
 					}
 					this.setState({ books: bookResults })
 				}
-			).catch((e) => {
-				this.setState({ books: [] })
-				// console.log(e)
-			})
-		) : (this.setState({ books: [] }))
+      )
+      .catch(e => this.setState({ books: [] }))
+    ) :
+    ( this.setState({ books: [] }))
 
 	}
 
@@ -61,7 +53,7 @@ class SearchBooks extends Component {
 				</div>
 				<div className="search-books-results">
 					<ol className="books-grid">
-						{this.state.books && (this.state.books.map((book) => (
+						{this.state.books && (this.state.books.map(book => (
 							<li key={book.id}>
 								<Book book={book} onUpdateBook={onUpdateBook}/>
 							</li>

@@ -11,17 +11,14 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books })
-    })
+    BooksAPI.getAll().then(books => this.setState({ books: books }))
   }
 
   updateBook(book, newShelf) {
-    // console.log(book)
-    BooksAPI.update(book, newShelf).then( () => {
+    BooksAPI.update(book, newShelf)
+    .then( () => {
       this.setState(prevState => {
         let index = prevState.books.findIndex(bookEntry => bookEntry.id === book.id)
-        // console.log(index)
         if(index !== -1) {
           prevState.books[index].shelf = newShelf
         }
@@ -31,8 +28,9 @@ class BooksApp extends React.Component {
         }
         return { state: prevState}
       })
-    }
-    )
+    })
+    .catch(() => console.log('book shelf update unsuccessful'));
+
   }
 
 
