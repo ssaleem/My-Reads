@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Book from './Book'
 
 class Bookshelf extends Component {
 	render() {
-    const { bookshelf, books, onUpdateBook} = this.props;
+    const { bookshelf, books} = this.props;
     let shelf = bookshelf.replace(/\s+/g, '').toLowerCase();
     let shelfItems = books.filter(book => book.shelf.toLowerCase() === shelf);
 		return (
@@ -13,7 +14,7 @@ class Bookshelf extends Component {
 					<ol className="books-grid">
 						{shelfItems.map(book => (
 							<li key={book.id}>
-								<Book book={book} onUpdateBook={onUpdateBook} />
+								<Book book={book} />
 							</li>
 						))}
 					</ol>
@@ -23,4 +24,7 @@ class Bookshelf extends Component {
 	}
 }
 
-export default Bookshelf
+function mapStateToProps(state) {
+  return { books: state.books };
+}
+export default connect(mapStateToProps)(Bookshelf);
