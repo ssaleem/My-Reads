@@ -3,6 +3,7 @@ import {Route} from 'react-router-dom';
 import * as BooksAPI from './utils/BooksAPI';
 import SearchBooks from './components/SearchBooks';
 import ListBooks from './components/ListBooks';
+import BooksContext from './context/BooksContext';
 import './App.css';
 
 class BooksApp extends React.Component {
@@ -37,13 +38,13 @@ class BooksApp extends React.Component {
   render () {
     return (
       <>
+        <BooksContext.Provider value={this.updateBook}>
         <Route
           exact
           path="/"
           render={() => (
             <ListBooks
               books={this.state.books}
-              onUpdateBook={this.updateBook}
             />
           )}
         />
@@ -52,10 +53,11 @@ class BooksApp extends React.Component {
           render={() => (
             <SearchBooks
               bookList={this.state.books}
-              onUpdateBook={this.updateBook}
             />
           )}
         />
+        </BooksContext.Provider>
+        
       </>
     );
   }
